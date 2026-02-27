@@ -1,0 +1,67 @@
+erDiagram
+    PROJECTS ||--o{ BOM : ""
+    BOM ||--|{ BOM_ITEMS : ""
+    COMPONENTS ||--o{ BOM_ITEMS : ""
+    COMPONENTS ||--o{ FOOTPRINTS : ""
+    COMPONENTS ||--o{ LISTINGS : ""
+    VENDORS_IN ||--o{ LISTINGS : ""
+    BOM_ITEMS ||--o{ BOM_ITEMS : ""
+
+    PROJECTS {
+        int Proj_ID PK
+        string Project_Name
+        date Creation_Date
+        string Description
+        float Total_Est_Budget
+    }
+
+    BOM {
+        int BOM_ID PK
+        int Proj_ID FK
+        string BOM_Name
+    }
+
+    BOM_ITEMS {
+        int BOM_ItemID PK
+        int BOM_ID FK
+        int Comp_ID FK
+        int parent_BOM_ItemID FK
+        int Quantity_Required
+        string Status
+    }
+
+    COMPONENTS {
+        int Comp_ID PK
+        string MPN
+        string Description
+        string Category
+        string Datasheet_URL
+    }
+
+    FOOTPRINTS {
+        int FP_ID PK
+        int Comp_ID FK
+        string Package_Type
+        string Footprint_Name
+        string CAD_Link
+        string Model_3D_Link
+    }
+
+    LISTINGS {
+        int Listing_ID PK
+        int Comp_ID FK
+        int Vendor_ID FK
+        float Price_INR
+        int Stock_Qty
+        string Purchase_URL
+        datetime Last_Updated
+    }
+
+    VENDORS_IN {
+        int Vendor_ID PK
+        string Vendor_Name
+        string Location_City
+        string GSTIN
+        string Contact_Info
+        string Website
+    }
