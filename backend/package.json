@@ -7,6 +7,7 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "db:init": "node scripts/db-init.js",
+    "db:reset": "node scripts/db-init.js",
     "db:check": "node scripts/db-check.js",
     "test": "echo \"No backend tests configured\""
   },

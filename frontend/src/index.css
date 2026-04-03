@@ -2,11 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply m-0 bg-slate-950 text-slate-100;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+html, body {
+  @apply m-0 bg-[#0A0F1C] text-slate-200 antialiased;
 }
 
-#root {
-  @apply min-h-screen;
+@layer utilities {
+  .animate-in {
+    animation: animate-in 0.5s ease-out forwards;
+  }
+  
+  .fade-in {
+    opacity: 0;
+    animation-name: fadeIn;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Custom Scrollbar for modern look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#0A0F1C];
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full border-2 border-[#0A0F1C];
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-700;
 }

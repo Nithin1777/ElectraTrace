@@ -5,6 +5,8 @@ const api = axios.create({
 });
 
 export const fetchProjects = async () => (await api.get("/projects")).data;
+export const createProject = async (payload) =>
+  (await api.post("/projects", payload)).data;
 export const fetchProjectById = async (projectId) =>
   (await api.get(`/projects/${projectId}`)).data;
 export const fetchBomsByProject = async (projectId) =>
@@ -17,6 +19,7 @@ export const deleteBomItem = async (id) =>
   (await api.delete(`/bom-items/${id}`)).data;
 export const fetchComponents = async (params = {}) =>
   (await api.get("/components", { params })).data;
+export const fetchListings = async () => (await api.get("/listings")).data;
 export const fetchListingsByComponent = async (compId) =>
   (await api.get(`/listings/component/${compId}`)).data;
 export const fetchFootprints = async () => (await api.get("/footprints")).data;

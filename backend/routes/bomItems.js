@@ -55,14 +55,20 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const { BOM_ID, Comp_ID, parent_BOM_ItemID, Quantity_Required, Status } =
     req.body;
+  if (!BOM_ID || !Comp_ID) {
+    return res.status(400).json({ error: "BOM_ID and Comp_ID are required" });
+  }
+  if (!Number.isFinite(Number(Quantity_Required))) {
+    return res.status(400).json({ error: "Quantity_Required must be numeric" });
+  }
   try {
     const [result] = await db.query(
       "INSERT INTO BOM_ITEMS (BOM_ID, Comp_ID, parent_BOM_ItemID, Quantity_Required, Status) VALUES (?, ?, ?, ?, ?)",
       [
-        BOM_ID,
-        Comp_ID,
+        Number(BOM_ID),
+        Number(Comp_ID),
         parent_BOM_ItemID || null,
-        Quantity_Required || 1,
+        Number(Quantity_Required) || 1,
         Status || "Pending",
       ],
     );
@@ -82,10 +88,18 @@ router.post("/", async (req, res) => {
 // Update BOM Item (trigger handles logging)
 router.put("/:id", async (req, res) => {
   const { parent_BOM_ItemID, Quantity_Required, Status } = req.body;
+  if (!Number.isFinite(Number(Quantity_Required))) {
+    return res.status(400).json({ error: "Quantity_Required must be numeric" });
+  }
   try {
     await db.query(
       "UPDATE BOM_ITEMS SET parent_BOM_ItemID = ?, Quantity_Required = ?, Status = ? WHERE BOM_ItemID = ?",
-      [parent_BOM_ItemID || null, Quantity_Required, Status, req.params.id],
+      [
+        parent_BOM_ItemID || null,
+        Number(Quantity_Required) || 1,
+        Status,
+        req.params.id,
+      ],
     );
     res.json({ message: "BOM Item updated" });
   } catch (err) {

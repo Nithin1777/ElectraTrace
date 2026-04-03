@@ -15,7 +15,11 @@ CREATE TABLE PROJECTS (
     Project_Name VARCHAR(255) NOT NULL,
     Creation_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     Description TEXT,
-    Total_Est_Budget DECIMAL(10, 2)
+    Total_Est_Budget DECIMAL(10, 2),
+    Lead_Name VARCHAR(100),
+    Due_Date DATE,
+    Version_Tag VARCHAR(20),
+    Status VARCHAR(50) DEFAULT 'Active'
 );
 
 CREATE TABLE BOM (

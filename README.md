@@ -19,11 +19,20 @@ Electra Trace is a full-stack PCB Bill of Materials (BOM) management system.
 2. Run `backend/schema.sql` in MySQL.
 3. Run `backend/seed.sql` for sample data.
 4. Start backend with `npm run dev` inside `backend`.
+5. Reset schema + seed data with `npm run db:reset` inside `backend`.
 
 ## Frontend Setup
 
 1. Copy `frontend/.env.example` to `frontend/.env`.
 2. Start frontend with `npm run dev` inside `frontend`.
+
+## Full-stack Dev (single command)
+
+From the repo root, run:
+
+- `npm run dev`
+
+This starts both backend and frontend together.
 
 ## Troubleshooting
 
